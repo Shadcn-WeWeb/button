@@ -157,6 +157,7 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   white-space: nowrap;
   border-radius: calc(var(--radius) - 2px);
   font-size: 0.875rem;
@@ -172,12 +173,9 @@ export default {
   font-family: inherit;
   user-select: none;
   position: relative;
-  /* Taille par défaut */
+  /* Taille par défaut - h-10 px-4 py-2 */
   height: 2.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 /* Focus ring exact - Shadcn UI specs */
@@ -199,11 +197,10 @@ export default {
   background-color: hsl(var(--primary)) !important;
   color: hsl(var(--primary-foreground)) !important;
   border-color: hsl(var(--primary)) !important;
-  padding: 0.5rem 1rem !important;
 }
 
 .ww-button.btn-default:hover:not(:disabled):not(.btn-loading) {
-  background-color: hsl(222.2, 47.4%, 10.2%) !important;
+  background-color: hsl(var(--primary) / 0.9) !important;
 }
 
 .ww-button.btn-default:active:not(:disabled):not(.btn-loading) {
@@ -215,11 +212,10 @@ export default {
   background-color: hsl(var(--destructive)) !important;
   color: hsl(var(--destructive-foreground)) !important;
   border-color: hsl(var(--destructive)) !important;
-  padding: 0.5rem 1rem !important;
 }
 
 .ww-button.btn-destructive:hover:not(:disabled):not(.btn-loading) {
-  background-color: hsl(0, 84.2%, 55.2%) !important;
+  background-color: hsl(var(--destructive) / 0.9) !important;
 }
 
 .ww-button.btn-destructive:active:not(:disabled):not(.btn-loading) {
@@ -231,7 +227,6 @@ export default {
   background-color: hsl(var(--background)) !important;
   color: hsl(var(--foreground)) !important;
   border-color: hsl(var(--border)) !important;
-  padding: 0.5rem 1rem !important;
 }
 
 .ww-button.btn-outline:hover:not(:disabled):not(.btn-loading) {
@@ -248,11 +243,10 @@ export default {
   background-color: hsl(var(--secondary)) !important;
   color: hsl(var(--secondary-foreground)) !important;
   border-color: hsl(var(--secondary)) !important;
-  padding: 0.5rem 1rem !important;
 }
 
 .ww-button.btn-secondary:hover:not(:disabled):not(.btn-loading) {
-  background-color: hsl(210, 40%, 93.1%) !important;
+  background-color: hsl(var(--secondary) / 0.8) !important;
 }
 
 .ww-button.btn-secondary:active:not(:disabled):not(.btn-loading) {
@@ -264,7 +258,6 @@ export default {
   background-color: transparent !important;
   color: hsl(var(--foreground)) !important;
   border-color: transparent !important;
-  padding: 0.5rem 1rem !important;
 }
 
 .ww-button.btn-ghost:hover:not(:disabled):not(.btn-loading) {
@@ -298,17 +291,17 @@ export default {
 
 /* ===== SIZES ===== */
 
-/* Small: 36px height */
+/* Small: h-9 px-3 */
 .ww-button.btn.btn-sm {
   height: 2.25rem !important;
-  padding: 0.5rem 0.75rem !important;
+  padding: 0 0.75rem !important;
   font-size: 0.875rem !important;
 }
 
-/* Large: 44px height */
+/* Large: h-11 px-8 */
 .ww-button.btn.btn-lg {
   height: 2.75rem !important;
-  padding: 0.5rem 2rem !important;
+  padding: 0 2rem !important;
   font-size: 1rem !important;
 }
 
@@ -427,12 +420,10 @@ export default {
   justify-content: center !important;
 }
 
-.ww-button .left-icon {
-  margin-right: 0.5rem;
-}
-
+/* Gap géré par flexbox gap: 0.5rem sur .btn */
+.ww-button .left-icon,
 .ww-button .right-icon {
-  margin-left: 0.5rem;
+  /* Pas de margin nécessaire avec gap */
 }
 
 .ww-button .icon-only {
