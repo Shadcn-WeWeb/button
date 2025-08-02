@@ -173,9 +173,9 @@ export default {
   font-family: inherit;
   user-select: none;
   position: relative;
-  /* Taille par défaut - h-10 px-4 py-2 */
+  /* Taille par défaut - h-10 px-4 */
   height: 2.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
 }
 
 /* Focus ring exact - Shadcn UI specs */
