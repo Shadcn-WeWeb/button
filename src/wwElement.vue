@@ -175,7 +175,7 @@ export default {
   position: relative;
   /* Taille par défaut - h-10 px-4 */
   height: 2.5rem;
-  padding: 0 1rem;
+  padding: 0 0.75rem;
 }
 
 /* Focus ring exact - Shadcn UI specs */
@@ -294,7 +294,7 @@ export default {
 /* Small: h-9 px-3 */
 .ww-button.btn.btn-sm {
   height: 2.25rem !important;
-  padding: 0 0.75rem !important;
+  padding: 0 1rem !important;
   font-size: 0.875rem !important;
 }
 
