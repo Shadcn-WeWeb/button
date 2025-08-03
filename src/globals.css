@@ -280,8 +280,9 @@
     justify-content: center !important;
     text-overflow: clip !important;
     overflow: visible !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+    border-color: hsl(var(--primary)) !important;
   }
 
   .ww-button.btn-loading .button-text {
