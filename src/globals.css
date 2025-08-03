@@ -227,11 +227,18 @@
     font-size: 1rem !important;
   }
 
-  /* Icon: square dimensions */
+  /* Icon: square dimensions + couleurs primary par défaut */
   .ww-button.btn-icon {
     height: 2.5rem !important;
     width: 2.5rem !important;
     padding: 0 !important;
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+    border-color: hsl(var(--primary)) !important;
+  }
+
+  .ww-button.btn-icon:hover:not(:disabled) {
+    background-color: hsl(var(--primary) / 0.9) !important;
   }
 
   /* Icon small variant: 36x36px */
@@ -298,7 +305,7 @@
   .loading-spinner {
     width: 1rem;
     height: 1rem;
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-top: 2px solid currentColor;
     border-radius: 50%;
     animation: spin 1s linear infinite;
