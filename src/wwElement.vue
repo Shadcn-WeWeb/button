@@ -76,8 +76,10 @@ export default {
       
       let classes = ['ww-button', 'btn', `btn-${variant}`];
       
-      // Ajouter la classe de taille
-      classes.push(`btn-${size}`);
+      // Ajouter la classe de taille seulement si différente de default
+      if (size !== 'default') {
+        classes.push(`btn-${size}`);
+      }
       
       // Classe pour l'état de chargement
       if (this.content.variant === 'loading') {

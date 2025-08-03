@@ -99,7 +99,7 @@
     user-select: none;
     position: relative;
     height: 2.5rem;
-    padding: 0 0.75rem;
+    padding: 0 1rem;
   }
 
   .btn:focus-visible {
@@ -216,7 +216,7 @@
   /* Small: h-9 px-3 */
   .btn-sm {
     height: 2.25rem !important;
-    padding: 0 1rem !important;
+    padding: 0 0.75rem !important;
     font-size: 0.875rem !important;
   }
 
@@ -232,13 +232,6 @@
     height: 2.5rem !important;
     width: 2.5rem !important;
     padding: 0 !important;
-    background-color: hsl(var(--primary)) !important;
-    color: hsl(var(--primary-foreground)) !important;
-    border-color: hsl(var(--primary)) !important;
-  }
-
-  .btn-icon:hover:not(:disabled) {
-    background-color: hsl(222.2, 47.4%, 10.2%) !important;
   }
 
   /* Icon small variant: 36x36px */
