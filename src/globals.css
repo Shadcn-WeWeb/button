@@ -77,122 +77,122 @@
 
 /* ===== BUTTON COMPONENT STYLES ===== */
 @layer components {
-  /* Base button - styles Shadcn exacts */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    border-radius: calc(var(--radius) - 2px);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.25;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-    border: 1px solid transparent;
-    cursor: pointer;
-    outline: none;
-    text-decoration: none;
-    font-family: inherit;
-    user-select: none;
-    position: relative;
-    height: 2.5rem;
-    padding: 0 1rem;
+  /* Base button - styles Shadcn exacts avec préfixe WeWeb */
+  .ww-button.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    white-space: nowrap !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    line-height: 1.25 !important;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+    border: 1px solid transparent !important;
+    cursor: pointer !important;
+    outline: none !important;
+    text-decoration: none !important;
+    font-family: inherit !important;
+    user-select: none !important;
+    position: relative !important;
+    height: 2.5rem !important;
+    padding: 0 1rem !important;
   }
 
-  .btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
+  .ww-button.btn:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring)) !important;
   }
 
-  .btn:disabled {
-    pointer-events: none;
-    opacity: 0.5;
+  .ww-button.btn:disabled {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
   }
 
   /* ===== VARIANTS ===== */
   
   /* DEFAULT (Primary) */
-  .btn-default {
+  .ww-button.btn-default {
     background-color: hsl(var(--primary)) !important;
     color: hsl(var(--primary-foreground)) !important;
     border-color: hsl(var(--primary)) !important;
   }
 
-  .btn-default:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-default:hover:not(:disabled):not(.btn-loading) {
     background-color: hsl(var(--primary) / 0.9) !important;
   }
 
-  .btn-default:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-default:active:not(:disabled):not(.btn-loading) {
     background-color: hsl(222.2, 47.4%, 9.2%) !important;
   }
 
   /* DESTRUCTIVE */
-  .btn-destructive {
+  .ww-button.btn-destructive {
     background-color: hsl(var(--destructive)) !important;
     color: hsl(var(--destructive-foreground)) !important;
     border-color: hsl(var(--destructive)) !important;
   }
 
-  .btn-destructive:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-destructive:hover:not(:disabled):not(.btn-loading) {
     background-color: hsl(var(--destructive) / 0.9) !important;
   }
 
-  .btn-destructive:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-destructive:active:not(:disabled):not(.btn-loading) {
     background-color: hsl(0, 84.2%, 50.2%) !important;
   }
 
   /* OUTLINE */
-  .btn-outline {
+  .ww-button.btn-outline {
     background-color: hsl(var(--background)) !important;
     color: hsl(var(--foreground)) !important;
     border-color: hsl(var(--border)) !important;
   }
 
-  .btn-outline:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-outline:hover:not(:disabled):not(.btn-loading) {
     background-color: hsl(var(--accent)) !important;
     color: hsl(var(--accent-foreground)) !important;
   }
 
-  .btn-outline:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-outline:active:not(:disabled):not(.btn-loading) {
     background-color: hsl(210, 40%, 94.1%) !important;
   }
 
   /* SECONDARY */
-  .btn-secondary {
+  .ww-button.btn-secondary {
     background-color: hsl(var(--secondary)) !important;
     color: hsl(var(--secondary-foreground)) !important;
     border-color: hsl(var(--secondary)) !important;
   }
 
-  .btn-secondary:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-secondary:hover:not(:disabled):not(.btn-loading) {
     background-color: hsl(var(--secondary) / 0.8) !important;
   }
 
-  .btn-secondary:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-secondary:active:not(:disabled):not(.btn-loading) {
     background-color: hsl(210, 40%, 90.1%) !important;
   }
 
   /* GHOST */
-  .btn-ghost {
+  .ww-button.btn-ghost {
     background-color: transparent !important;
     color: hsl(var(--foreground)) !important;
     border-color: transparent !important;
   }
 
-  .btn-ghost:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-ghost:hover:not(:disabled):not(.btn-loading) {
     background-color: hsl(var(--accent)) !important;
     color: hsl(var(--accent-foreground)) !important;
   }
 
-  .btn-ghost:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-ghost:active:not(:disabled):not(.btn-loading) {
     background-color: hsl(210, 40%, 94.1%) !important;
   }
 
   /* LINK */
-  .btn-link {
+  .ww-button.btn-link {
     background-color: transparent !important;
     color: hsl(var(--primary)) !important;
     border-color: transparent !important;
@@ -203,65 +203,65 @@
     min-height: auto !important;
   }
 
-  .btn-link:hover:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-link:hover:not(:disabled):not(.btn-loading) {
     text-decoration: underline !important;
   }
 
-  .btn-link:active:not(:disabled):not(.btn-loading) {
+  .ww-button.btn-link:active:not(:disabled):not(.btn-loading) {
     color: hsl(222.2, 47.4%, 9.2%) !important;
   }
 
   /* ===== SIZES ===== */
   
   /* Small: h-9 px-3 */
-  .btn-sm {
+  .ww-button.btn-sm {
     height: 2.25rem !important;
     padding: 0 0.75rem !important;
     font-size: 0.875rem !important;
   }
 
   /* Large: h-11 px-8 */
-  .btn-lg {
+  .ww-button.btn-lg {
     height: 2.75rem !important;
     padding: 0 2rem !important;
     font-size: 1rem !important;
   }
 
   /* Icon: square dimensions */
-  .btn-icon {
+  .ww-button.btn-icon {
     height: 2.5rem !important;
     width: 2.5rem !important;
     padding: 0 !important;
   }
 
   /* Icon small variant: 36x36px */
-  .btn-icon.btn-sm {
+  .ww-button.btn-icon.btn-sm {
     height: 2.25rem !important;
     width: 2.25rem !important;
     padding: 0 !important;
   }
 
   /* Icon large variant: 44x44px */
-  .btn-icon.btn-lg {
+  .ww-button.btn-icon.btn-lg {
     height: 2.75rem !important;
     width: 2.75rem !important;
     padding: 0 !important;
   }
 
   /* Exception pour le variant link qui ne doit pas avoir de padding fixe */
-  .btn-link.btn-sm {
+  .ww-button.btn-link.btn-sm {
     padding: 0 !important;
     height: auto !important;
   }
 
-  .btn-link.btn-lg {
+  .ww-button.btn-link.btn-lg {
     padding: 0 !important;
     height: auto !important;
   }
 
   /* ===== LOADING STATE ===== */
   
-  .btn-loading {
+  .ww-button.btn-loading {
     width: auto !important;
     max-width: none !important;
     min-width: fit-content !important;
@@ -277,7 +277,7 @@
     cursor: pointer !important;
   }
 
-  .btn-loading .button-text {
+  .ww-button.btn-loading .button-text {
     text-overflow: clip !important;
     overflow: visible !important;
     white-space: nowrap !important;
@@ -306,7 +306,7 @@
     flex-shrink: 0;
   }
 
-  .btn-icon .loading-spinner {
+  .ww-button.btn-icon .loading-spinner {
     margin-right: 0;
   }
 }
