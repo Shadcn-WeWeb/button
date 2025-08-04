@@ -1,36 +1,30 @@
 <template>
-  <button
-    :class="computedClasses"
-    :disabled="content.disabled || content.variant === 'loading'"
-    :type="content.type || 'button'"
+  <component 
+    :is="tag"
+    :class="dynamicClasses"
+    :type="buttonType"
+    :disabled="content.disabled"
+    v-bind="linkProps"
+    @focus="onFocus"
+    @blur="onBlur"
+    @mousedown="onActivate"
+    @mouseup="onDeactivate"
+    @touchstart="onTouchActivate"
+    @touchend="onDeactivate"
+    @keydown.enter="onActivate"
+    @keydown.space="onActivate"
     @click="handleClick"
   >
-    <!-- VARIANT LOADING: Spinner + texte -->
-    <template v-if="content.variant === 'loading'">
-      <div class="loading-spinner"></div>
-      <span class="button-text">{{ content.loadingText || 'Loading...' }}</span>
-    </template>
-    
-    <!-- VARIANT ICON: Icône seule -->
-    <template v-else-if="content.variant === 'icon'">
-      <i 
-        v-if="content.iconName" 
-        :data-lucide="content.iconName"
-        class="button-icon icon-only"
-      ></i>
-      <span v-else class="button-text">⬜</span>
-    </template>
-    
-    <!-- AUTRES VARIANTS: Icône optionnelle + texte -->
-    <template v-else>
-      <i 
-        v-if="content.showIcon && content.iconName" 
-        :data-lucide="content.iconName"
-        class="button-icon left-icon"
-      ></i>
-      <span class="button-text">{{ content.text || 'Button' }}</span>
-    </template>
-  </button>
+    <wwElement v-if="content.hasLeftIcon" v-bind="content.leftIcon" />
+    <i 
+      v-if="content.showIcon && content.iconName" 
+      :data-lucide="content.iconName"
+      class="button-icon"
+    ></i>
+    <div v-if="content.variant === 'loading'" class="loading-spinner"></div>
+    <wwText tag="span" :text="text" class="button-text" />
+    <wwElement v-if="content.hasRightIcon" v-bind="content.rightIcon" />
+  </component>
 </template>
 
 <script>
@@ -44,6 +38,20 @@ export default {
     /* wwEditor:end */
   },
   emits: ["trigger-event"],
+  setup(props) {
+    const { hasLink, linkProps, isEditing } = wwLib.wwElement.useLink({
+      ...props,
+      options: { linkable: true },
+    });
+    
+    return { hasLink, linkProps, isEditing };
+  },
+  data() {
+    return {
+      isReallyFocused: false,
+      isReallyActive: false,
+    };
+  },
   mounted() {
     // Charger Lucide Icons dynamiquement si pas déjà présent
     if (!window.lucide) {
@@ -70,28 +78,65 @@ export default {
     });
   },
   computed: {
-    computedClasses() {
-      const variant = this.content.variant || 'default';
-      const size = this.content.size || 'default';
-      
-      let classes = ['ww-button', 'btn', `btn-${variant}`];
-      
-      // Ajouter la classe de taille seulement si différente de default
-      if (size !== 'default') {
-        classes.push(`btn-${size}`);
-      }
-      
-      // Classe pour l'état de chargement
+    tag() {
+      if (this.wwEditorState?.isSelected) return 'div';
+      if (this.hasLink && !this.isEditing) return 'a';
+      return 'button';
+    },
+    
+    buttonType() {
+      if (this.tag !== 'button') return undefined;
+      return this.content.buttonType || 'button';
+    },
+    
+    text() {
       if (this.content.variant === 'loading') {
-        classes.push('btn-loading');
+        return this.content.loadingText || 'Loading...';
       }
-      
-      return classes.join(' ');
+      return this.content.text || 'Button';
+    },
+    
+    dynamicClasses() {
+      return {
+        'ww-button-shadcn': true,
+        'btn': true,
+        'focus': this.isReallyFocused,
+        'active': this.isReallyActive,
+        'disabled': this.content.disabled,
+        [`variant-${this.content.variant || 'default'}`]: true,
+        [`size-${this.content.size || 'default'}`]: true,
+        'loading': this.content.variant === 'loading',
+        'icon-only': this.content.variant === 'icon'
+      };
     }
   },
   methods: {
+    onFocus() {
+      this.isReallyFocused = true;
+      this.$emit('trigger-event', { name: 'focus' });
+    },
+    
+    onBlur() {
+      this.isReallyFocused = false;
+      this.$emit('trigger-event', { name: 'blur' });
+    },
+    
+    onActivate() {
+      if (!this.content.disabled) {
+        this.isReallyActive = true;
+      }
+    },
+    
+    onDeactivate() {
+      this.isReallyActive = false;
+    },
+    
+    onTouchActivate(event) {
+      event.preventDefault();
+      this.onActivate();
+    },
+    
     handleClick(event) {
-      // Ne pas émettre d'événement si disabled ou loading  
       if (this.content.disabled || this.content.variant === 'loading') {
         event.preventDefault();
         return;
@@ -106,7 +151,23 @@ export default {
           size: this.content.size
         }
       });
+    },
+    
+    refreshLucide() {
+      if (window.lucide) {
+        const icons = this.$el.querySelectorAll('[data-lucide]');
+        icons.forEach(icon => {
+          icon.innerHTML = '';
+          icon.removeAttribute('data-icon');
+        });
+        window.lucide.createIcons();
+      }
     }
+  },
+  
+  watch: {
+    'content.iconName'() { this.$nextTick(() => this.refreshLucide()); },
+    'content.showIcon'() { this.$nextTick(() => this.refreshLucide()); }
   }
 };
 </script>
@@ -114,16 +175,8 @@ export default {
 <style>
 @import './globals.css';
 
-/* ===== STYLES SPÉCIFIQUES BUTTON ===== */
-
-/* Préfixe WeWeb pour éviter conflits */
-.ww-button {
-  /* Hérite de .btn dans globals.css */
-}
-
 /* ===== ICÔNES LUCIDE ===== */
-
-.ww-button .button-icon {
+.ww-button-shadcn .button-icon {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -134,41 +187,28 @@ export default {
   vertical-align: middle;
 }
 
-/* Mode icon-only - centrage parfait */
-.ww-button.btn-icon {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Gap géré par flexbox gap: 0.5rem sur .btn */
-.ww-button .left-icon,
-.ww-button .right-icon {
-  /* Pas de margin nécessaire avec gap */
-}
-
-.ww-button .icon-only {
+.ww-button-shadcn.icon-only .button-icon {
   width: 1.25rem;
   height: 1.25rem;
 }
 
 /* Responsive des icônes selon la taille */
-.ww-button.btn-sm .button-icon {
+.ww-button-shadcn.size-sm .button-icon {
   width: 0.875rem;
   height: 0.875rem;
 }
 
-.ww-button.btn-lg .button-icon {
+.ww-button-shadcn.size-lg .button-icon {
   width: 1.125rem;
   height: 1.125rem;
 }
 
-.ww-button.btn-sm .icon-only {
+.ww-button-shadcn.size-sm.icon-only .button-icon {
   width: 1rem;
   height: 1rem;
 }
 
-.ww-button.btn-lg .icon-only {
+.ww-button-shadcn.size-lg.icon-only .button-icon {
   width: 1.5rem;
   height: 1.5rem;
 }
