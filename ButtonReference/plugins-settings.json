@@ -1,0 +1,19 @@
+{
+    "41448d5d-ae26-49bd-82b6-1c79f462e972": {
+        "id": "da523a55-0970-4465-a360-14b73272e305",
+        "name": "Token Based Auth",
+        "designId": "43ca4e27-48b4-4e73-947d-94a4cd4b743e",
+        "pluginId": "41448d5d-ae26-49bd-82b6-1c79f462e972",
+        "publicData": {
+            "type": "bearer-token",
+            "userEndpoint": "https://n8n.beforbuild.com/webhook-test/login"
+        }
+    },
+    "2bd1c688-31c5-443e-ae25-59aa5b6431fb": {
+        "id": "6cbd8da2-cea3-4af9-ab9d-bdbd76a966bb",
+        "name": "REST API",
+        "designId": "43ca4e27-48b4-4e73-947d-94a4cd4b743e",
+        "pluginId": "2bd1c688-31c5-443e-ae25-59aa5b6431fb",
+        "publicData": {}
+    }
+}
