@@ -78,7 +78,7 @@
 /* ===== BUTTON COMPONENT STYLES ===== */
 @layer components {
   /* Base button - styles Shadcn exacts avec préfixe WeWeb */
-  .ww-button-shadcn.btn {
+  .ww-button.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -88,9 +88,7 @@
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+    transition: all 150ms ease;
     border: 1px solid transparent;
     cursor: pointer;
     outline: none;
@@ -102,17 +100,17 @@
     padding: 0 1rem;
   }
 
-  .ww-button-shadcn.btn.focus {
+  .ww-button.btn.focus {
     outline: none;
     box-shadow: 0 0 0 2px hsl(var(--ring));
   }
   
-  .ww-button-shadcn.btn.active {
+  .ww-button.btn.active {
     transform: scale(0.98);
   }
 
-  .ww-button-shadcn.btn.disabled,
-  .ww-button-shadcn.btn:disabled {
+  .ww-button.btn.disabled,
+  .ww-button.btn:disabled {
     pointer-events: none;
     opacity: 0.6;
     cursor: not-allowed;
@@ -121,64 +119,64 @@
   /* ===== VARIANTS ===== */
   
   /* DEFAULT (Primary) */
-  .ww-button-shadcn.btn.variant-default {
+  .ww-button.btn.variant-default {
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
     border-color: hsl(var(--primary));
   }
 
-  .ww-button-shadcn.btn.variant-default:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-default:hover:not(.disabled):not(.loading) {
     background-color: hsl(var(--primary) / 0.9);
   }
 
   /* DESTRUCTIVE */
-  .ww-button-shadcn.btn.variant-destructive {
+  .ww-button.btn.variant-destructive {
     background-color: hsl(var(--destructive));
     color: hsl(var(--destructive-foreground));
     border-color: hsl(var(--destructive));
   }
 
-  .ww-button-shadcn.btn.variant-destructive:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-destructive:hover:not(.disabled):not(.loading) {
     background-color: hsl(var(--destructive) / 0.9);
   }
 
   /* OUTLINE */
-  .ww-button-shadcn.btn.variant-outline {
+  .ww-button.btn.variant-outline {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     border-color: hsl(var(--border));
   }
 
-  .ww-button-shadcn.btn.variant-outline:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-outline:hover:not(.disabled):not(.loading) {
     background-color: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
   }
 
   /* SECONDARY */
-  .ww-button-shadcn.btn.variant-secondary {
+  .ww-button.btn.variant-secondary {
     background-color: hsl(var(--secondary));
     color: hsl(var(--secondary-foreground));
     border-color: hsl(var(--secondary));
   }
 
-  .ww-button-shadcn.btn.variant-secondary:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-secondary:hover:not(.disabled):not(.loading) {
     background-color: hsl(var(--secondary) / 0.8);
   }
 
   /* GHOST */
-  .ww-button-shadcn.btn.variant-ghost {
+  .ww-button.btn.variant-ghost {
     background-color: transparent;
     color: hsl(var(--foreground));
     border-color: transparent;
   }
 
-  .ww-button-shadcn.btn.variant-ghost:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-ghost:hover:not(.disabled):not(.loading) {
     background-color: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
   }
 
   /* LINK */
-  .ww-button-shadcn.btn.variant-link {
+  .ww-button.btn.variant-link {
     background-color: transparent;
     color: hsl(var(--primary));
     border-color: transparent;
@@ -189,28 +187,12 @@
     min-height: auto;
   }
 
-  .ww-button-shadcn.btn.variant-link:hover:not(.disabled):not(.loading) {
+  .ww-button.btn.variant-link:hover:not(.disabled):not(.loading) {
     text-decoration: underline;
   }
 
-  /* ===== SIZES ===== */
-  
-  /* Small: h-9 px-3 */
-  .ww-button-shadcn.btn.size-sm {
-    height: 2.25rem;
-    padding: 0 0.75rem;
-    font-size: 0.875rem;
-  }
-
-  /* Large: h-11 px-8 */
-  .ww-button-shadcn.btn.size-lg {
-    height: 2.75rem;
-    padding: 0 2rem;
-    font-size: 1rem;
-  }
-
-  /* Icon: square dimensions + couleurs primary par défaut */
-  .ww-button-shadcn.btn.icon-only {
+  /* ICON ONLY */
+  .ww-button.btn.icon-only {
     height: 2.5rem;
     width: 2.5rem;
     padding: 0;
@@ -219,38 +201,54 @@
     border-color: hsl(var(--primary));
   }
 
-  .ww-button-shadcn.btn.icon-only:hover:not(.disabled) {
+  .ww-button.btn.icon-only:hover:not(.disabled) {
     background-color: hsl(var(--primary) / 0.9);
   }
 
   /* Icon small variant: 36x36px */
-  .ww-button-shadcn.btn.icon-only.size-sm {
+  .ww-button.btn.icon-only.size-sm {
     height: 2.25rem;
     width: 2.25rem;
     padding: 0;
   }
 
   /* Icon large variant: 44x44px */
-  .ww-button-shadcn.btn.icon-only.size-lg {
+  .ww-button.btn.icon-only.size-lg {
     height: 2.75rem;
     width: 2.75rem;
     padding: 0;
   }
 
+  /* ===== SIZES ===== */
+  
+  /* Small: h-9 px-3 */
+  .ww-button.btn.size-sm {
+    height: 2.25rem;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  /* Large: h-11 px-8 */
+  .ww-button.btn.size-lg {
+    height: 2.75rem;
+    padding: 0 2rem;
+    font-size: 1rem;
+  }
+
   /* Exception pour le variant link qui ne doit pas avoir de padding fixe */
-  .ww-button-shadcn.btn.variant-link.size-sm {
+  .ww-button.btn.variant-link.size-sm {
     padding: 0;
     height: auto;
   }
 
-  .ww-button-shadcn.btn.variant-link.size-lg {
+  .ww-button.btn.variant-link.size-lg {
     padding: 0;
     height: auto;
   }
 
   /* ===== LOADING STATE ===== */
   
-  .ww-button-shadcn.btn.loading {
+  .ww-button.btn.loading {
     width: auto;
     max-width: none;
     min-width: fit-content;
@@ -267,7 +265,7 @@
     border-color: hsl(var(--primary));
   }
 
-  .ww-button-shadcn.btn.loading .button-text {
+  .ww-button.btn.loading .button-text {
     text-overflow: clip;
     overflow: visible;
     white-space: nowrap;
@@ -296,7 +294,7 @@
     flex-shrink: 0;
   }
 
-  .ww-button-shadcn.btn.icon-only .loading-spinner {
+  .ww-button.btn.icon-only .loading-spinner {
     margin-right: 0;
   }
 }
