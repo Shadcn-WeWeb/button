@@ -62,15 +62,17 @@ export default {
       section: "style",
       options: {
         options: [
-          { value: "primary", label: { en: "Primary", fr: "Principal" } },
-          { value: "secondary", label: { en: "Secondary", fr: "Secondaire" } },
-          { value: "destructive", label: { en: "Destructive", fr: "Destructif" } },
-          { value: "outline", label: { en: "Outline", fr: "Contour" } },
-          { value: "ghost", label: { en: "Ghost", fr: "Fantôme" } },
-          { value: "link", label: { en: "Link", fr: "Lien" } }
+          { value: "default", label: { en: "Default (Primary)", fr: "Par défaut (Principal)" } },
+          { value: "destructive", label: { en: "Destructive (Danger)", fr: "Destructif (Danger)" } },
+          { value: "outline", label: { en: "Outline (Border)", fr: "Contour (Bordure)" } },
+          { value: "secondary", label: { en: "Secondary (Muted)", fr: "Secondaire (Sourd)" } },
+          { value: "ghost", label: { en: "Ghost (Transparent)", fr: "Fantôme (Transparent)" } },
+          { value: "link", label: { en: "Link (Underlined)", fr: "Lien (Souligné)" } },
+          { value: "icon", label: { en: "Icon Only", fr: "Icône seule" } },
+          { value: "loading", label: { en: "Loading State", fr: "État de chargement" } }
         ]
       },
-      defaultValue: "primary"
+      defaultValue: "default"
     },
 
     size: {

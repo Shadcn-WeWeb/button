@@ -1,7 +1,7 @@
 <template>
     <component 
         :is="tag"
-        :class="hybridClasses"
+        :class="dynamicClasses"
         :type="buttonType"
         :disabled="content.disabled"
         v-bind="wewebProps"
@@ -21,7 +21,7 @@
             :data-lucide="content.iconName"
             class="button-icon"
         ></i>
-        <div v-if="content.loading" class="loading-spinner"></div>
+        <div v-if="content.variant === 'loading'" class="loading-spinner"></div>
         <wwText tag="span" :text="text" class="button-text" />
         <wwElement v-if="content.hasRightIcon" v-bind="content.rightIcon" />
     </component>
@@ -88,25 +88,24 @@ export default {
         },
         
         text() {
-            if (this.content.loading) {
+            if (this.content.variant === 'loading') {
                 return this.content.loadingText || 'Loading...';
             }
             return this.content.text || 'Button';
         },
         
-        hybridClasses() {
-            return [
-                'ww-button',
-                `ww-button--${this.content.variant || 'primary'}`,
-                `ww-button--${this.content.size || 'default'}`,
-                {
-                    'ww-button--focused': this.isReallyFocused,
-                    'ww-button--active': this.isReallyActive,
-                    'ww-button--disabled': this.content.disabled,
-                    'ww-button--loading': this.content.loading,
-                    'ww-button--link': this.hasLink && !this.isEditing
-                }
-            ];
+        dynamicClasses() {
+            return {
+                'ww-button-shadcn': true,
+                'btn': true,
+                'focus': this.isReallyFocused,
+                'active': this.isReallyActive,
+                'disabled': this.content.disabled,
+                [`variant-${this.content.variant || 'default'}`]: true,
+                [`size-${this.content.size || 'default'}`]: true,
+                'loading': this.content.variant === 'loading',
+                'icon-only': this.content.variant === 'icon'
+            };
         },
         
         wewebProps() {
@@ -146,7 +145,7 @@ export default {
         },
         
         handleClick(event) {
-            if (this.content.disabled || this.content.loading) {
+            if (this.content.disabled || this.content.variant === 'loading') {
                 event.preventDefault();
                 return;
             }
@@ -185,7 +184,7 @@ export default {
 @import './globals.css';
 
 /* ===== ICÔNES LUCIDE ===== */
-.ww-button .button-icon {
+.ww-button-shadcn .button-icon {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
@@ -196,14 +195,29 @@ export default {
     vertical-align: middle;
 }
 
+.ww-button-shadcn.icon-only .button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
 /* Responsive des icônes selon la taille */
-.ww-button--sm .button-icon {
+.ww-button-shadcn.size-sm .button-icon {
     width: 0.875rem;
     height: 0.875rem;
 }
 
-.ww-button--lg .button-icon {
+.ww-button-shadcn.size-lg .button-icon {
     width: 1.125rem;
     height: 1.125rem;
+}
+
+.ww-button-shadcn.size-sm.icon-only .button-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.ww-button-shadcn.size-lg.icon-only .button-icon {
+    width: 1.5rem;
+    height: 1.5rem;
 }
 </style>
